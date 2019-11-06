@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html ng-app >
+
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.angularjs.org/1.0.1/angular-1.0.1.min.js"></script>
+</head>
+
+<body class = 'text-center'>
+
+    <H1>Lista de Alunos</H1>
+
+    <input type="text" ng-model="nome" >
+    <p>Olá! Meu nome é: {{ nome }}</p>
+
+    <div ng-controller="ListaComprasController" role="tablist">
+        <table>
+            <thead>
+                <tr>
+                    <th>Alunos</th>
+                    <th>Notas</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in itens" >
+                    <td><strong>{{ item.produto }}</strong></td>
+                    <td>{{ item.quantidade }}</td>
+                </tr>
+            </tbody>
+        </table>
+        
+
+        <BR>
+
+        <form class="form-inline" name="formItem" class="list-group" >
+            <input type="text" ng-model="item.produto" placeholder="Aluno" >
+            <input type="number" ng-model="item.quantidade" placeholder="Nota" >
+            <button class="btn btn-primary" ng-click="adicionaItem()"> adicionar ítem</button >
+        </form>
+        <BR>
+        <tr ng-repeat="item in itens" '>
+            <td><strong>{{ item.produto | uppercase }}</strong></td>
+            <td>{{ item.quantidade }}</td>
+        </tr>
+
+    </div>
+    </body>
+
+    <script>
+        function ListaComprasController($scope) {
+            $scope.itens = [
+                { produto: 'Tony Stark', quantidade: 5, comprado: false },
+                { produto: 'João das Neves', quantidade: 9, comprado: false }
+            ];
+
+            $scope.adicionaItem = function () {
+                $scope.itens.push({
+                    produto: $scope.item.produto,
+                    quantidade: $scope.item.quantidade,
+                    comprado: false
+                });
+                $scope.item.produto = $scope.item.quantidade = '';
+            };
+        }
+    </script>
+
+
+
+</html>
